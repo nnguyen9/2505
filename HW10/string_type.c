@@ -1,5 +1,5 @@
 #include "string_type.h"
-#include "bytes.h"
+#include "bytes.c"
 
 //
 //
@@ -228,6 +228,12 @@ bool string_erase(string_t * const str, size_t index, size_t len)
 bool string_split(string_t ** const result, const string_t * const str, 
 			const char * const split, size_t * num_splits)
 {
+	char *token = strtok(str, split);
+	num_splits = 0;
+	while (token != NULL) {
+		string_init(result[num_splits]);
+		num_splits++;
+	}
 	return false;
 }
 
