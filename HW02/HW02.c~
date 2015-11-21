@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+int main() {
+    char fileName[20];
+
+    // Gets the filename for the input file
+    printf("Enter filename: ");
+    scanf("%s", fileName);
+
+    // Opens the file, if not found exits the program with
+    // error of 1
+    FILE *input;
+    if ((input = fopen(fileName, "r")) == 0) {
+	printf("The file %s could not be found.\n", fileName);
+	return 1;
+    }
+    printf("Decoded messages:\n");
+
+    // Loops until end of file
+    while (!feof(input)) {    
+	    char buff[100];
+	    int numWords;
+
+	    // Gets number of words from first line
+	    fgets(buff, 100, input);
+	    sscanf(buff, "%d", &numWords);   
+
+	    // Loops until number of words
+	    for (int i = 0; i < numWords; i++) {
+		// Gets the line for the word
+		fgets(buff, sizeof buff, input);
+
+		// Calculates the letters from the 2 integers
+		int letter,num1,num2;
+		while (sscanf(buff, "%d %d%[^\\\\]s", &num1, &num2, buff) > 0 && num1 >=0 && num2 >= 0) {
+			letter = num1 + num2;
+			printf("%c", letter);
+			num1 = -1;
+			num2 = -1;
+		}
+		printf(" ");
+	   }
+	   printf("\n");
+
+	   // White line skip
+	   fgets(buff, 100, input);
+    }
+
+
+    return(0);
+}
+
+//On my honor:
+//
+//-I have not discussed the C language code in my program with
+// anyone other than my instructor or the teaching assistants 
+// assigned to this course.
+//
+//-I have not used C language code obtained from another student, 
+// or any other unauthorized source, either modified or unmodified.  
+//
+//-If any C language code or documentation used in my program 
+// was obtained from an allowed source, such as a text book or course
+// notes, that has been clearly noted with a proper citation in
+// the comments of my program.
+//
+// Nam Nguyen
