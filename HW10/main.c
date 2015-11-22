@@ -162,11 +162,11 @@ int main(int argc, char ** argv)
 	// 	size_t ln = l + 1;
 
 	// 	// Try to split up the line into words.
-	if(!string_split(&words, &string, delim, &num_words))
-	{
-		printf("Error spliting line %zu", ln);
-		break;
-	}	
+	// if(!string_split(&words, &string, delim, &num_words))
+	// {
+	// 	printf("Error spliting line %zu", ln);
+	// 	break;
+	// }	
 
 	printf("number of splits:\n%d", &num_words);
 
