@@ -151,28 +151,28 @@ int main(int argc, char ** argv)
 	// string_insert(&test, 0, &r, 1);
 	// string_insert(&test, 0, &k, 1);
 	// string_insert(&test, 0, &a, 1);
-	char * string = "QCQUY CaJWDLYOe	W	PXZiRB	SBGoAVDQZW uPORAN NDBSRR";
+	char * string = "QCQUY\tCaJWDLYOe\tW\tPXZiRB\tSBGoAVDQZW\tuPORAN\tNDBSRR";
 	string_insert(&test, 0, string, strlen(string));
 	printf("The contents are:\n\"%s\"\n", string_c_str(&test));
 
-	char * delim = "	";
+	char * delim = "\t";
 
 	size_t num_words; 
 	string_t *words = NULL;
 	// 	size_t ln = l + 1;
 
 	// 	// Try to split up the line into words.
-	// if(!string_split(&words, &string, delim, &num_words))
-	// {
-	// 	printf("Error spliting line %zu", ln);
-	// 	break;
-	// }	
+	if(!string_split(&words, &string, delim, &num_words))
+	{
+		printf("Error spliting line\n");
+		return 1;
+	}	
 
-	printf("number of splits:\n%d", &num_words);
+	printf("number of splits:\n%d\n", &num_words);
 
 	for (size_t w = 0; w < num_words; w++)
 	{
-		printf("Token %d is:\n\"%s\"", w, string_c_str(&words[w]));
+		printf("Token %d is:\n\"%s\"\n", w, string_c_str(&words[w]));
 	}
 
 	return 0;

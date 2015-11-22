@@ -1,4 +1,5 @@
 #include "string_type.h"
+#include "bytes.c"
 
 //
 //
@@ -229,16 +230,29 @@ bool string_erase(string_t * const str, size_t index, size_t len)
 bool string_split(string_t ** const result, const string_t * const str, 
 			const char * const split, size_t * num_splits)
 {
-	char *token = strtok(string_c_str(str), split);
-	num_splits = 0;
+	printf("start split\n");
+	printf("input word: %s", string_c_str(str));
+	char word[str->len];
+	for (int i = 0; i < str->len; i++) {
+		word[i]=string_c_str(str)[i];
+	}
+	printf("Word: %s\n", word);
+//	char * temp = string_c_str(str);
+	char * token = strtok(word, split);
+	printf("after get token");
+	printf("first token: %s\n", token);
+	*num_splits = 0;
 	int count;
 	while (token != NULL) {
+		printf("Token is %s\n", token);
 		string_init(&result[count]);
 		string_insert(&result[count], 0, token, strlen(token));
-		num_splits++;
+		token = strtok(NULL, split);
+		*num_splits = *num_splits + 1;
+		printf("Num splits: %d\n", *num_splits);
 		count++;
 	}
-	return false;
+	return true;
 }
 
 
