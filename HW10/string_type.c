@@ -115,6 +115,7 @@ bool string_set(string_t * const str, size_t index, char in)
 {
 	if (index < str->len) {
 		bytes_set(&str->bytes, index, in);
+		(str->len)++;
 		return true;
 	}
 	return false;
@@ -150,6 +151,7 @@ bool string_insert(string_t * const str, size_t index,
 	if (index > str->len) {
 		return false;
 	}
+	str->len = str->len + len;
 	return bytes_insert(&str->bytes, index, buf, len);
 }
 
