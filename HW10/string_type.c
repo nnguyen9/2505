@@ -230,29 +230,44 @@ bool string_erase(string_t * const str, size_t index, size_t len)
 bool string_split(string_t ** const result, const string_t * const str, 
 			const char * const split, size_t * num_splits)
 {
-	printf("start split\n");
+	// printf("start split\n");
 	
+	// char temp[256];
+	// string_t * tempString = NULL;
+	// strcpy(temp, string_c_str(str));
+	// printf("temp string: %s\n", temp);
+	// char * token = strtok(temp, split);
+	// int count = 0;
+	// while (token != NULL) {
+	// 	printf("TokeN: %s\n", token);
+	// 	string_init(&tempString[count]);
+	// 	string_insert(&tempString[count], 0, token, strlen(token));
+	// 	printf("Check: %s\n", string_c_str(&tempString[count]));
+	// 	token = strtok(NULL, split);
+	// 	count++;
+	// }
+	// *num_splits = count;
+	// printf("numSplits: %d\n", *num_splits);
+	// *result = malloc((count) * sizeof(struct string_t));
+	// *result = temp;
+	// printf("Original String: %s\n", string_c_str(str));
+	// printf("Done with split\n");
 	char temp[256];
-	string_t * tempString = NULL;
 	strcpy(temp, string_c_str(str));
-	printf("temp string: %s\n", temp);
 	char * token = strtok(temp, split);
 	int count = 0;
 	while (token != NULL) {
-		printf("TokeN: %s\n", token);
-		string_init(&tempString[count]);
-		string_insert(&tempString[count], 0, token, strlen(token));
-		printf("Check: %s\n", string_c_str(&tempString[count]));
-		token = strtok(NULL, split);
 		count++;
+		token = strtok(NULL, split);
 	}
+
 	*num_splits = count;
-	printf("numSplits: %d\n", *num_splits);
 	*result = malloc((count) * sizeof(struct string_t));
-	*result = temp;
-	printf("Original String: %s\n", string_c_str(str));
-	printf("Done with split\n");
-	return true;
+
+	strcpy(temp, string_c_str(str));
+	char * token2 = strtok(temp, split);
+
+	return false;
 }
 
 
@@ -310,8 +325,10 @@ bool string_join(string_t * const result,  const string_t * const words,
 		if (!string_insert(result, result->len, string_c_str(&words[i]), strlen(string_c_str(&words[i])))) {
 			return false;
 		}
-		if (!string_insert(result, result->len, sep, strlen(sep))) {
-			return false;
+		if (i < num_words - 1) {
+			if (!string_insert(result, result->len, sep, strlen(sep))) {
+				return false;
+			}
 		}
 	}
 	return true;
