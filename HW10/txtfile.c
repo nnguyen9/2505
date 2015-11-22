@@ -49,13 +49,17 @@ bool txtfile_read(FILE *in, string_t * const result)
 bool txtfile_readlines(FILE *in, string_t ** const result, size_t * num_lines)
 {
 	*num_lines = 0;
+	int offset = 0;
 	while (!feof(in)) {    
 		char* buff = malloc(sizeof(char)* (LINE_CHUNK));
 
 	    // Gets number of words from first line
 	    fgets(buff, LINE_CHUNK, in);  
-	    string_init(*result[(int)(*num_lines++)]);
-	    if (!string_insert(*result[(int)(*num_lines++), 0, buff, strlen(buff)));
+	    string_init(*(*result + offset));
+	    if (!string_insert(*result[(int)(*num_lines++), 0, buff, strlen(buff))) {
+	    	return false;
+	    }
+	    offset += strlen(buff);
     }
 	return true;
 }
