@@ -155,8 +155,25 @@ int main(int argc, char ** argv)
 	string_insert(&test, 0, string, strlen(string));
 	printf("The contents are:\n\"%s\"\n", string_c_str(&test));
 
+	char * delim = "	";
 
+	size_t num_words; 
+	string_t *words = NULL;
+	// 	size_t ln = l + 1;
 
+	// 	// Try to split up the line into words.
+	if(!string_split(&words, &string, delim, &num_words))
+	{
+		printf("Error spliting line %zu", ln);
+		break;
+	}	
+
+	printf("number of splits:\n%d", &num_words);
+
+	for (size_t w = 0; w < num_words; w++)
+	{
+		printf("Token %d is:\n\"%s\"", w, string_c_str(&words[w]));
+	}
 
 	return 0;
 }
