@@ -176,6 +176,7 @@ bool string_erase(string_t * const str, size_t index, size_t len)
 	if (index >= str->len) {
 		return false;
 	}
+	
 	return bytes_erase(&str->bytes, index, len);
 }
 
