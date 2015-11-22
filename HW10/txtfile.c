@@ -62,7 +62,7 @@ bool txtfile_readlines(FILE *in, string_t ** const result, size_t * num_lines)
 	    if (!string_insert(&result[offset], 0, buff, strlen(buff))) {
 	    	return false;
 	    }
-	    //bytes_fprintf(stdout, &result[offset]->bytes);
+	    
 	    printf("Line: %s\n", string_c_str(&result[offset]));
 	    offset++;
 	    *num_lines = *num_lines + 1;
