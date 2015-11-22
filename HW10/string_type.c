@@ -232,7 +232,7 @@ bool string_split(string_t ** const result, const string_t * const str,
 	num_splits = 0;
 	while (token != NULL) {
 		string_init(result[(int)num_splits]);
-		string_insert(result[(int)num_splits]);
+		string_insert(result[(int)num_splits], 0, token, strlen(token));
 		num_splits++;
 	}
 	return false;
