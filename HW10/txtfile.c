@@ -18,18 +18,10 @@
 //
 bool txtfile_read(FILE *in, string_t * const result)
 {
+	char* buff = malloc(sizeof(char)* (LINE_CHUNK));
+	fgets(buff, LINE_CHUNK, in);
 	string_init(result);
-	while (!feof(in)) {    
-	    char buff[LINE_CHUNK];
-
-	    // Gets number of words from first line
-	    fgets(buff, LINE_CHUNK, in);  
-	    if (!string_insert(result, result->len, buff, LINE_CHUNK)) {
-	    	return false;
-	    }
-	    
-    }
-	return true;
+	return string_insert(result, 0, buff, strlen(buff));
 }
 
 // Read the individual lines (indicated with a "\n") of a text file and 
@@ -56,16 +48,14 @@ bool txtfile_read(FILE *in, string_t * const result)
 //
 bool txtfile_readlines(FILE *in, string_t ** const result, size_t * num_lines)
 {
-	string_init(*result);
+	*num_lines = 0;
 	while (!feof(in)) {    
-	    char buff[LINE_CHUNK];
+		char* buff = malloc(sizeof(char)* (LINE_CHUNK));
 
 	    // Gets number of words from first line
 	    fgets(buff, LINE_CHUNK, in);  
-	    if (!string_insert(result, **result->len, buff, LINE_CHUNK)) {
-	    	return false;
-	    }
-	    
+	    string_init(*result[(int)(*num_lines++)]);
+	    if (!string_insert(*result[(int)(*num_lines++), 0, buff, strlen(buff)));
     }
 	return true;
 }
