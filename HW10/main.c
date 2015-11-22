@@ -115,16 +115,16 @@ int main(int argc, char ** argv)
 	string_init(&test);
 
 	printf("Insert characters\n");
-	string_insert('S');
-	string_insert('N');
-	string_insert('L');
-	string_insert('N');
-	string_insert('K');
-	string_insert('G');
-	string_insert('J');
-	string_insert('R');
-	string_insert('K');
-	string_insert('A');
+	string_insert(test, 0, 'S', 1);
+	string_insert(test, 0, 'N', 1);
+	string_insert(test, 0, 'L', 1);
+	string_insert(test, 0, 'N', 1);
+	string_insert(test, 0, 'K', 1);
+	string_insert(test, 0, 'G', 1);
+	string_insert(test, 0, 'J', 1);
+	string_insert(test, 0, 'R', 1);
+	string_insert(test, 0, 'K', 1);
+	string_insert(test, 0, 'A', 1);
 	printf("The contents are:\n\"%s\", string_c_str(test)");
 
 
