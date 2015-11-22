@@ -231,19 +231,27 @@ bool string_split(string_t ** const result, const string_t * const str,
 			const char * const split, size_t * num_splits)
 {
 	printf("start split\n");
-	char * token = strtok(string_c_str(str), split);
-	printf("first token: %s\n", token);
-	*num_splits = 0;
-	int count;
+	
+	char temp[256];
+	string_t * tempString = NULL;
+	strcpy(temp, string_c_str(str));
+	printf("temp string: %s\n", temp);
+	char * token = strtok(temp, split);
+	int count = 0;
 	while (token != NULL) {
-		string_init(&result[count]);
-		string_insert(&result[count], 0, token, strlen(token));
-		printf("Check: %s\n", string_c_str(&result[count]));
+		printf("TokeN: %s\n", token);
+		string_init(&tempString[count]);
+		string_insert(&tempString[count], 0, token, strlen(token));
+		printf("Check: %s\n", string_c_str(&tempString[count]));
 		token = strtok(NULL, split);
 		count++;
 	}
 	*num_splits = count;
-
+	printf("numSplits: %d\n", *num_splits);
+	*result = malloc((count) * sizeof(struct string_t));
+	*result = temp;
+	printf("Original String: %s\n", string_c_str(str));
+	printf("Done with split\n");
 	return true;
 }
 
@@ -297,7 +305,16 @@ void string_free_split(string_t * words, const size_t num_words)
 bool string_join(string_t * const result,  const string_t * const words, 
 			const size_t num_words, const char * const sep)
 {
-	return false;
+	string_init(result);
+	for (int i = 0; i < num_words; i++) {
+		if (!string_insert(result, result->len, string_c_str(&words[i]), strlen(string_c_str(&words[i])))) {
+			return false;
+		}
+		if (!string_insert(result, result->len, sep, strlen(sep))) {
+			return false;
+		}
+	}
+	return true;
 }
 
 
