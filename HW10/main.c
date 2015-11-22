@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
 		return 3;
 	}
 	fclose(fp);
-
+	printf("Done with read line\n");
 	printf("Find duplicate words in file %s:\n", argv[1]);
 
 	// This is our previous word, starts out as the empty string.
