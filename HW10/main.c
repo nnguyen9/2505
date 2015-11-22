@@ -151,7 +151,7 @@ int main(int argc, char ** argv)
 	string_insert(&test, 0, &r, 1);
 	string_insert(&test, 0, &k, 1);
 	string_insert(&test, 0, &a, 1);
-	printf("The contents are:\n\"%s\"", string_c_str(&test));
+	printf("The contents are:\n\"%s\"\n", string_c_str(&test));
 
 
 	return 0;

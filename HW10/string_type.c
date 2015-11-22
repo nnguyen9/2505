@@ -1,5 +1,4 @@
 #include "string_type.h"
-#include "bytes.c"
 
 //
 //
@@ -115,7 +114,6 @@ bool string_set(string_t * const str, size_t index, char in)
 {
 	if (index < str->len) {
 		bytes_set(&str->bytes, index, in);
-		(str->len)++;
 		return true;
 	}
 	return false;
@@ -178,7 +176,7 @@ bool string_erase(string_t * const str, size_t index, size_t len)
 	if (index >= str->len) {
 		return false;
 	}
-	
+	str->len = str->len - len;
 	return bytes_erase(&str->bytes, index, len);
 }
 
@@ -233,10 +231,12 @@ bool string_split(string_t ** const result, const string_t * const str,
 {
 	char *token = strtok(string_c_str(str), split);
 	num_splits = 0;
+	int count;
 	while (token != NULL) {
-		string_init(result[(int)num_splits]);
-		string_insert(result[(int)num_splits], 0, token, strlen(token));
+		string_init(&result[count]);
+		string_insert(&result[count], 0, token, strlen(token));
 		num_splits++;
+		count++;
 	}
 	return false;
 }
