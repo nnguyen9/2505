@@ -18,12 +18,11 @@
 //
 bool txtfile_read(FILE *in, string_t * const result)
 {
-	
-	string_init(result);
+	string_init(&result);
 	while(!feof(in)) {
 		char* buff = malloc(sizeof(char)* (LINE_CHUNK));
 		fgets(buff, LINE_CHUNK, in);
-		if (!string_insert(result, 0, buff, strlen(buff))) {
+		if (!string_insert(&result, 0, buff, strlen(buff))) {
 			return false;
 		}
 	}

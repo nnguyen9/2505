@@ -141,17 +141,21 @@ int main(int argc, char ** argv)
 	char x = 'X';
 	char y = 'Y';
 	char z = 'Z';
-	string_insert(&test, 0, &s, 1);
-	string_insert(&test, 0, &n, 1);
-	string_insert(&test, 0, &l, 1);
-	string_insert(&test, 0, &n, 1);
-	string_insert(&test, 0, &k, 1);
-	string_insert(&test, 0, &g, 1);
-	string_insert(&test, 0, &j, 1);
-	string_insert(&test, 0, &r, 1);
-	string_insert(&test, 0, &k, 1);
-	string_insert(&test, 0, &a, 1);
+	// string_insert(&test, 0, &s, 1);
+	// string_insert(&test, 0, &n, 1);
+	// string_insert(&test, 0, &l, 1);
+	// string_insert(&test, 0, &n, 1);
+	// string_insert(&test, 0, &k, 1);
+	// string_insert(&test, 0, &g, 1);
+	// string_insert(&test, 0, &j, 1);
+	// string_insert(&test, 0, &r, 1);
+	// string_insert(&test, 0, &k, 1);
+	// string_insert(&test, 0, &a, 1);
+	char * string = "QCQUY CaJWDLYOe	W	PXZiRB	SBGoAVDQZW uPORAN NDBSRR";
+	string_insert(&test, 0, string, strlen(string));
 	printf("The contents are:\n\"%s\"\n", string_c_str(&test));
+
+
 
 
 	return 0;
