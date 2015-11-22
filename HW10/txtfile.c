@@ -56,6 +56,17 @@ bool txtfile_read(FILE *in, string_t * const result)
 //
 bool txtfile_readlines(FILE *in, string_t ** const result, size_t * num_lines)
 {
-	return false;
+	string_init(result);
+	while (!feof(in)) {    
+	    char buff[LINE_CHUNK];
+
+	    // Gets number of words from first line
+	    fgets(buff, LINE_CHUNK, in);  
+	    if (!string_insert(result, result->len, buff, LINE_CHUNK)) {
+	    	return false;
+	    }
+	    
+    }
+	return true;
 }
 
