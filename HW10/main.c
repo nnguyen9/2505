@@ -34,8 +34,8 @@ int main(int argc, char ** argv)
 		printf("Error reading lines from text file %s\n", argv[1]);
 		return 3;
 	}
+	printf("done with readl ine");
 	fclose(fp);
-	printf("Done with read line\n");
 	printf("Find duplicate words in file %s:\n", argv[1]);
 
 	// This is our previous word, starts out as the empty string.
