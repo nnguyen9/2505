@@ -19,12 +19,17 @@
 bool txtfile_read(FILE *in, string_t * const result)
 {
 	string_init(result);
+	printf("String init\n");
 	while(!feof(in)) {
+		printf("Start loop\n");
 		char* buff = malloc(sizeof(char)* (LINE_CHUNK));
+		printf("after alloc\n");
 		fgets(buff, LINE_CHUNK, in);
-		if (!string_insert(&result, 0, buff, strlen(buff))) {
+		printf("affter fgets\nBuff:\n%s", buff);
+		if (!string_insert(result, result->len, buff, strlen(buff))) {
 			return false;
 		}
+		printf("end of loop\n");
 	}
 	return true;
 }
@@ -53,25 +58,10 @@ bool txtfile_read(FILE *in, string_t * const result)
 //
 bool txtfile_readlines(FILE *in, string_t ** const result, size_t * num_lines)
 {
-	printf("Start ReadLine\n");
-	*num_lines = 0;
-	int offset = 0;
-	while (!feof(in)) {    
-		char* buff = malloc(sizeof(char)* (LINE_CHUNK));
-
-	    fgets(buff, LINE_CHUNK, in);  
-	    
-	    string_init(&result[offset]);
-	    printf("string initialized\n");
-	    if (!string_insert(&result[offset], 0, buff, strlen(buff))) {
-	    	return false;
-	    }
-
-	    offset++;
-	    *num_lines = *num_lines + 1;
-    }
+	string_t * temp;
+	txtfile_read(in, temp);
 	
-	return true;
+	return string_split(result, temp, "\n", num_lines);
 }
 
 //On my honor:

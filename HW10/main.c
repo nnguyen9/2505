@@ -179,5 +179,15 @@ int main(int argc, char ** argv)
 		printf("Token %d is:\n\"%s\"\n", w, string_c_str(&words[w]));
 	}
 
+	FILE *fp = fopen(argv[1], "r");
+	string_t filestuf;
+	if (fp == NULL)
+ 	{
+ 		printf("Coudn't open file %s.\n", argv[1]);
+		return 2;
+	}
+	txtfile_read(fp, &filestuf);
+	printf("File:\n%s\n", string_c_str(&filestuf));
+
 	return 0;
 }
