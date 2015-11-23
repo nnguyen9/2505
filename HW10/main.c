@@ -169,7 +169,7 @@ int main(int argc, char ** argv)
 	}	
 
 	printf("number of splits:\n%d\n", num_words);
-
+	printf("string:\n%s\n", string_c_str(&test));
 	for (size_t w = 0; w < num_words; w++)
 	{
 		printf("Token %d is:\n\"%s\"\n", w, string_c_str(&(words[w])));

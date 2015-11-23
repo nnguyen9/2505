@@ -7,6 +7,7 @@
 //
 void string_init(string_t * const str)
 {
+	printf("start init\n");
 	// Use the bytes_init function, it will set up almost everything.
 	bytes_init(&str->bytes);
 
@@ -147,6 +148,7 @@ bool string_set(string_t * const str, size_t index, char in)
 bool string_insert(string_t * const str, size_t index, 
 			const char * const buf, size_t len)
 {
+	printf("start insert\n");
 	if (index > str->len) {
 		return false;
 	}
@@ -230,44 +232,63 @@ bool string_erase(string_t * const str, size_t index, size_t len)
 bool string_split(string_t ** const result, const string_t * const str, 
 			const char * const split, size_t * num_splits)
 {
-	// printf("start split\n");
-	
-	// char temp[256];
-	// string_t * tempString = NULL;
-	// strcpy(temp, string_c_str(str));
-	// printf("temp string: %s\n", temp);
-	// char * token = strtok(temp, split);
-	// int count = 0;
-	// while (token != NULL) {
-	// 	printf("TokeN: %s\n", token);
-	// 	string_init(&tempString[count]);
-	// 	string_insert(&tempString[count], 0, token, strlen(token));
-	// 	printf("Check: %s\n", string_c_str(&tempString[count]));
-	// 	token = strtok(NULL, split);
-	// 	count++;
-	// }
-	// *num_splits = count;
-	// printf("numSplits: %d\n", *num_splits);
-	// *result = malloc((count) * sizeof(struct string_t));
-	// *result = temp;
-	// printf("Original String: %s\n", string_c_str(str));
-	// printf("Done with split\n");
 	char temp[256];
 	strcpy(temp, string_c_str(str));
+	//printf("orig String: %s\n", string_c_str(str));
 	char * token = strtok(temp, split);
-	int count = 0;
+	 //printf("orig String: %s\n", string_c_str(str));
+
+	if (token == NULL) {
+		return false;
+	}
+
+	size_t count = 0;
 	while (token != NULL) {
 		count++;
 		token = strtok(NULL, split);
 	}
 
 	*num_splits = count;
-	*result = malloc((count) * sizeof(struct string_t));
-
+	printf("Count: %d", count);
+	*result = (string_t*)malloc((count) * sizeof(struct string_t));
+	if (*result == NULL) {
+		printf("result is null");
+	}
 	strcpy(temp, string_c_str(str));
-	char * token2 = strtok(temp, split);
 
-	return false;
+	char * token2 = strtok(temp, split);
+	
+	count = 0;
+	while (token2 != NULL) {
+		printf("Token 2: %s\nCount: %d\n", token2, count);
+		string_t tempString;
+		//tempString = (string_t*)malloc(strlen(token2) * sizeof(char));
+		string_init(&tempString);
+ //printf("orig String: %s\n", string_c_str(str));
+
+		string_insert(&tempString, 0, token2, strlen(token2));
+ //printf("orig String: %s\n", string_c_str(str));
+
+		
+		string_init(result[count]);
+// printf("orig String: %s\n", string_c_str(str));
+
+//		if (!string_insert(result[count], 0, token2, strlen(token2))) {
+//			return false;
+//		}
+
+		string_copy(result[count], &tempString);
+		printf("CHeck token: %s\n", string_c_str(result[count]));
+		//printf("orig String: %s\n", string_c_str(str));
+
+		token2 = strtok(NULL, split);
+		count++;
+	}
+	printf("Out of loop\n");
+	printf("First result: %s\n", string_c_str(result[0]));
+	*num_splits = count;
+
+	return true;
 }
 
 
