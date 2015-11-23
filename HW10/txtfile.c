@@ -19,17 +19,12 @@
 bool txtfile_read(FILE *in, string_t * const result)
 {
 	string_init(result);
-	printf("String init\n");
 	while(!feof(in)) {
-		printf("Start loop\n");
 		char* buff = malloc(sizeof(char)* (LINE_CHUNK));
-		printf("after alloc\n");
 		fgets(buff, LINE_CHUNK, in);
-		printf("affter fgets\nBuff:\n%s", buff);
 		if (!string_insert(result, result->len, buff, strlen(buff))) {
 			return false;
 		}
-		printf("end of loop\n");
 	}
 	return true;
 }

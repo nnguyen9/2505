@@ -1,4 +1,5 @@
 #include "string_type.h"
+#include "bytes.c"
 
 //
 //
