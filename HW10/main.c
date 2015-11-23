@@ -162,17 +162,21 @@ int main(int argc, char ** argv)
 	// 	size_t ln = l + 1;
 
 	// 	// Try to split up the line into words.
+	//
+	printf("\nPoint2: Memory allocated: %d bytes\n",malloc_usable_size(words));
 	if(!string_split(&words, &test, delim, &num_words))
 	{
 		printf("Error spliting line\n");
 		return 1;
 	}	
+	
+	printf("\nPoint2: Memory allocated: %d bytes\n",malloc_usable_size(words));
 
 	printf("number of splits:\n%d\n", num_words);
 	printf("string:\n%s\n", string_c_str(&test));
 	for (size_t w = 0; w < num_words; w++)
 	{
-		printf("Token %d is:\n\"%s\"\n", w, string_c_str(&(words[w])));
+		printf("Token %d is:\n\"%s\"\n", w, string_c_str(&words[w]));
 	}
 
 	return 0;
