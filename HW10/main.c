@@ -177,7 +177,7 @@ int main(int argc, char ** argv)
 	FILE *fp = fopen(argv[1], "r");
 	printf("before readline\n");
 	txtfile_readlines(fp, &words, &num_words);
-	printf("after readline\n");
+	printf("after readline\nwords: %d", num_words);
 	for (size_t w = 0; w < num_words; w++)
 	{
 		printf("Token %d is:\n\"%s\"\n", w, string_c_str(&words[w]));
