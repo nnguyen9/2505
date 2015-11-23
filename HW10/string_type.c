@@ -277,13 +277,11 @@ bool string_split(string_t ** const result, const string_t * const str,
 		count++;
 	}
 	printf("Out of loop\n");
-	//printf("First result: %s\n", string_c_str(result[6]));
 	printf("orig String: %s\n", string_c_str(str));
 	
 	for (size_t w = 0; w < count; w++)
         {
                 printf("Token %d is:\n\"%s\"\n", w, string_c_str(result[w]));
-
         }
 
 
