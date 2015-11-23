@@ -293,15 +293,15 @@ bool string_split(string_t ** const result, const string_t * const str,
 	temp = malloc(str->len + 2);
 	strcpy(temp, string_c_str(str));
 
-	string_t * tempRes;
+	string_t * tempRes = NULL;
 	int count = 0;
 
 	char * token = strtok(temp, split);
-	if (!token) {
+	if (token == NULL) {
 		return false;
 	}
-	while (!token) {
-		tempRes = realloc(res, sizeof(string_t) * (count + 2));
+	while (token != NULL) {
+		tempRes = realloc(tempRes, sizeof(string_t) * (count + 2));
 		string_init(&tempRes[count]);
 		if (!string_insert(&tempRes[count], 0, token, strlen(token))) {
 			return false;
